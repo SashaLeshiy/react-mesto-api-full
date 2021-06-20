@@ -1,0 +1,28 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directory
+/backend/node_modules/*
+
+# Optional npm cache directory
+.npm
+.cache
+.config
+.gnupg
+.pm2
+.ssh
+.bash_history
+.bash_logout
+.bashrc
+.dbshell
+.mongorc.js
+.profile
+.local
+
+
+# Optional REPL history
+.DS_Store
+.idea
+.vscode
