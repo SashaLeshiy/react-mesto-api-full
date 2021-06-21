@@ -5,22 +5,27 @@ const { celebrate, Joi, errors } = require('celebrate');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
-// var cors = require('cors');
+var cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-// app.use(cors());
-// app.options('https://zomlesh.nomoredomains.club', cors());
+//app.use(cors());
+//app.options('https://zomlesh.nomoredomains.club', cors());
 
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "https://zomlesh.nomoredomains.club");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
-  res.setHeader('Access-Control-Allow-Credentials', true)
-  next();
-}); 
+var corsOptions = {
+  origin: 'https://zomlesh.nomoredomains.club',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
+// app.use(function(req, res, next) {
+//   res.setHeader("Access-Control-Allow-Origin", "https://zomlesh.nomoredomains.club");
+//   res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE");
+//   res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
+//   res.setHeader('Access-Control-Allow-Credentials', true)
+//   next();
+// }); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,7 +44,7 @@ app.post('/sign-in', celebrate({
   }),
 }), login);
 
-app.post('/sign-up', celebrate({
+app.post('/sign-up', cors(corsOptions), celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
