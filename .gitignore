@@ -20,6 +20,7 @@ npm-debug.log*
 .mongorc.js
 .profile
 .local
+.gitconfig
 
 
 # Optional REPL history
