@@ -5,14 +5,22 @@ const { celebrate, Joi, errors } = require('celebrate');
 const users = require('./routes/users');
 const cards = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
-var cors = require('cors');
+// var cors = require('cors');
 
 const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors());
-app.options('https://zomlesh.nomoredomains.club', cors());
+// app.use(cors());
+// app.options('https://zomlesh.nomoredomains.club', cors());
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'https://zomlesh.nomoredomains.club');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+
+  next();
+}); 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
