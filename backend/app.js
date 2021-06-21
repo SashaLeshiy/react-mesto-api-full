@@ -11,8 +11,10 @@ const { PORT = 3000 } = process.env;
 
 const app = express();
 
-app.use(cors());
-app.options('*', cors());
+var corsOptions = {
+  origin: 'https://zomlesh.nomoredomains.club',
+  optionsSuccessStatus: 200 
+}
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,14 +26,14 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
   useUnifiedTopology: true,
 });
 
-app.post('/sign-in', celebrate({
+app.post('/sign-in', cors(corsOptions), celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post('/sign-up', celebrate({
+app.post('/sign-up', cors(corsOptions), celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
