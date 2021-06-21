@@ -15,10 +15,10 @@ const app = express();
 // app.options('https://zomlesh.nomoredomains.club', cors());
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'https://zomlesh.nomoredomains.club');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
-
+  res.setHeader("Access-Control-Allow-Origin", "https://zomlesh.nomoredomains.club");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,DELETE");
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With, Access-Control-Allow-Headers, Content-Type, Authorization, Origin, Accept");
+  res.setHeader('Access-Control-Allow-Credentials', true)
   next();
 }); 
 
