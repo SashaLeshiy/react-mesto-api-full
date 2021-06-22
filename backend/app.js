@@ -25,14 +25,14 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.post('/sign-in', celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post('/sign-up', celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
