@@ -42,13 +42,13 @@ app.post('/signup', celebrate({
 app.use('/', users);
 app.use('/', cards);
 
-app.use(errorLogger);
+// app.use(errorLogger);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
-
+app.use(errorLogger);
 
 app.use(errors());
 
