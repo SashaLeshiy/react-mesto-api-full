@@ -43,8 +43,7 @@ app.use('/', users);
 app.use('/', cards);
 
 app.use((req, res) => {
-  console.log('er');
-  res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
+  res.status(404).send({ message: 'Ресурс не найден' });
 });
 
 app.use(errorLogger);
