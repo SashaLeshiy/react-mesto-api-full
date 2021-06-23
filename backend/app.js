@@ -9,7 +9,7 @@ const { login, createUser } = require('./controllers/users');
 
 require('dotenv').config();
 
-const { PORT, MONGO_URI } = process.env;
+const { PORT, MONGO_URI, API_PATH } = process.env;
 
 const app = express();
 
@@ -39,8 +39,8 @@ app.post('/sign-up', celebrate({
   }),
 }), createUser);
 
-app.use('/', users);
-app.use('/', cards);
+app.use(`${API_PATH}/`, users);
+app.use(`${API_PATH}/`, cards);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
