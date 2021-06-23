@@ -32,14 +32,14 @@ app.post(`${API_PATH}/sign-in`, celebrate({
   }),
 }), login);
 
-app.post(`${API_PATH}/sign-up`, celebrate({
+app.post(`/api/sign-up`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), createUser);
 
-app.use(`/api/users/me`, users);
+app.use(`/api/`, users);
 app.use(`/api/`, cards);
 
 app.use((req, res) => {
