@@ -39,8 +39,8 @@ app.post(`${API_PATH}/sign-up`, celebrate({
   }),
 }), createUser);
 
-app.use(`${API_PATH}/`, users);
-app.use(`${API_PATH}/`, cards);
+app.use(`/api/users/me`, users);
+app.use(`/api/`, cards);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
