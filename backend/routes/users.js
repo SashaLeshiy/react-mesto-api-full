@@ -13,8 +13,8 @@ const {
 } = require('../controllers/users');
 
 router.get('/users', auth, getUsers);
-router.get('https://zomlesh.nomoredomains.club/api/users/me', auth, getUser);
-router.get('/users/:userId', auth, celebrate({
+router.get(`${API_PATH}/users/me`, auth, getUser);
+router.get(`${API_PATH}/users/:userId`, auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),

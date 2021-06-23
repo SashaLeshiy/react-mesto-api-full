@@ -25,22 +25,22 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.post(`https://zomlesh.nomoredomains.club/api/sign-in`, celebrate({
+app.post(`${API_PATH}/sign-in`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post(`https://zomlesh.nomoredomains.club/api/sign-up`, celebrate({
+app.post(`${API_PATH}/sign-up`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), createUser);
 
-app.use(`https://zomlesh.nomoredomains.club/api/`, users);
-app.use(`https://zomlesh.nomoredomains.club/api/`, cards);
+app.use(`${API_PATH}/`, users);
+app.use(`${API_PATH}/`, cards);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
