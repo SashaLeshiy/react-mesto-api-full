@@ -48,7 +48,7 @@ app.use((req, res) => {
 
 app.use(errorLogger);
 
-// app.use(errors());
+app.use(errors());
 
 app.use((err, req, res, next) => {
   if (err.name === 'CastError') {
