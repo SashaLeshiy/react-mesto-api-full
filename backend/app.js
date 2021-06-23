@@ -11,8 +11,6 @@ require('dotenv').config();
 
 const { PORT, MONGO_URI, API_PATH } = process.env;
 
-console.log(API_PATH);
-
 const app = express();
 
 app.use(bodyParser.json());
