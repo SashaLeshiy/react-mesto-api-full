@@ -24,6 +24,7 @@ module.exports.getUser = (req, res, next) => {
       }
     })
     .catch((err) => {
+      console.log('111');
       next(err);
     });
 };
