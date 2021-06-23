@@ -25,14 +25,14 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.post('/signin', celebrate({
+app.post('/sign-in', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post('/signup', celebrate({
+app.post('/sign-up', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
@@ -42,9 +42,8 @@ app.post('/signup', celebrate({
 app.use('/', users);
 app.use('/', cards);
 
-// app.use(errorLogger);
-
 app.use((req, res) => {
+  console.log('er');
   res.status(404).send({ message: 'Запрашиваемый ресурс не найден' });
 });
 
