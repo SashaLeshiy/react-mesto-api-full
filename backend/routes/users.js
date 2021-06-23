@@ -14,7 +14,7 @@ const {
 
 router.get('/users', auth, getUsers);
 router.get(`/api/users/me`, auth, getUser);
-router.get(`${API_PATH}/users/:userId`, auth, celebrate({
+router.get(`/users/:userId`, auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),
