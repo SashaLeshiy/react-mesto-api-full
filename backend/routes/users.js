@@ -12,15 +12,15 @@ const {
   getUser,
 } = require('../controllers/users');
 
-router.get('/users', auth, getUsers);
+router.get('/api/users', auth, getUsers);
 router.get(`/api/users/me`, auth, getUser);
-router.get(`/users/:userId`, auth, celebrate({
+router.get(`/api/users/:userId`, auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),
 }), getUserId);
 
-router.patch('/users/me', auth, celebrate({
+router.patch('/api/users/me', auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),

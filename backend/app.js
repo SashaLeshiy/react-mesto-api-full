@@ -32,15 +32,15 @@ app.post(`/sign-in`, celebrate({
   }),
 }), login);
 
-app.post(`/sign-up`, celebrate({
+app.post(`/api/sign-up`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), createUser);
 
-app.use(`/`, users);
-app.use(`/`, cards);
+app.use(`/api/`, users);
+app.use(`/api/`, cards);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
