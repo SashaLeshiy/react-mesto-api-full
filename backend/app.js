@@ -39,7 +39,7 @@ app.post(`/api/sign-up`, celebrate({
   }),
 }), createUser);
 
-app.use(`/api/users`, users);
+app.use(`/api/`, users);
 app.use(`/api/cards`, cards);
 
 app.use((req, res) => {
