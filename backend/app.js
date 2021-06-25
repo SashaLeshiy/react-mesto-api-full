@@ -9,9 +9,7 @@ const { login, createUser } = require('./controllers/users');
 
 require('dotenv').config();
 
-const { PORT, MONGO_URI, API_PATH } = process.env;
-
-console.log(MONGO_URI, API_PATH);
+const { PORT, MONGO_URI } = process.env;
 
 const app = express();
 
@@ -26,22 +24,22 @@ mongoose.connect(MONGO_URI, {
 });
 
 app.use(requestLogger);
-app.post(`/api/sign-in`, celebrate({
+app.post('/api/sign-in', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post(`/api/sign-up`, celebrate({
+app.post('/api/sign-up', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required(),
     password: Joi.string().required(),
   }),
 }), createUser);
 
-app.use(`/`, users);
-app.use(`/`, cards);
+app.use('/', users);
+app.use('/', cards);
 
 app.use((req, res) => {
   res.status(404).send({ message: 'Ресурс не найден' });
@@ -77,5 +75,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Сервер на порту ${PORT}`);
 });
-
-

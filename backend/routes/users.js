@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const auth = require('../middlewares/auth');
 
-const { API_PATH } = process.env;
+// const { API_PATH } = process.env;
 
 const {
   getUsers,
@@ -13,8 +13,8 @@ const {
 } = require('../controllers/users');
 
 router.get('/api/users', auth, getUsers);
-router.get(`/api/users/me`, auth, getUser);
-router.get(`/api/users/:userId`, auth, celebrate({
+router.get('/api/users/me', auth, getUser);
+router.get('/api/users/:userId', auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),
