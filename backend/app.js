@@ -73,5 +73,7 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Сервер на порту ${PORT}, ${MONGO_URI}, ${API_PATH}`);
+  console.log(`Сервер на порту ${PORT}`);
 });
+
+console.log(MONGO_URI, API_PATH);
