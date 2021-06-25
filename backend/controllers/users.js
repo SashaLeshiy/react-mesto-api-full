@@ -2,6 +2,9 @@ const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+
+require('dotenv').config();
+
 const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {

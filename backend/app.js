@@ -11,6 +11,8 @@ require('dotenv').config();
 
 const { PORT, MONGO_URI, API_PATH } = process.env;
 
+console.log(MONGO_URI, API_PATH);
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -75,4 +77,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Сервер на порту ${PORT}`);
 });
+
 
