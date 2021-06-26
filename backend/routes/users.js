@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const auth = require('../middlewares/auth');
 
-// const { API_PATH } = process.env;
-
 const {
   getUsers,
   getUserId,
