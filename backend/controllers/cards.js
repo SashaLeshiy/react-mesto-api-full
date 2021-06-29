@@ -11,6 +11,7 @@ module.exports.getCards = (req, res, next) => {
 module.exports.getCardId = (req, res, next) => {
   Card.findById(req.params.id)
     .then((card) => {
+      console.log(card);
       if (!card) {
         const err = new Error();
         err.statusCode = 404;
