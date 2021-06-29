@@ -16,7 +16,7 @@ module.exports.getCardId = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send(card);
+        res.send({ card });
       }
     })
     .catch((err) => {
