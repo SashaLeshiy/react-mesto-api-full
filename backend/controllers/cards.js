@@ -17,7 +17,7 @@ module.exports.getCardId = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ card });
+        res.send(card);
       }
     })
     .catch((err) => {
@@ -76,7 +76,7 @@ module.exports.likeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((err) => {
@@ -96,7 +96,7 @@ module.exports.dislikeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: card });
+        res.send(card);
       }
     })
     .catch((err) => {
