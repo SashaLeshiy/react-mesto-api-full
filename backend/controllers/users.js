@@ -9,7 +9,7 @@ const { JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
-    .then((users) => res.send({ data: users }))
+    .then((users) => res.send(users))
     .catch((err) => {
       next(err);
     });
@@ -23,7 +23,7 @@ module.exports.getUser = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -39,7 +39,7 @@ module.exports.getUserId = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: user });
+        res.send(user);
       }
     })
     .catch((err) => {
@@ -87,7 +87,7 @@ module.exports.changeProfile = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: profile });
+        res.send(profile);
       }
     })
     .catch((err) => {
@@ -110,7 +110,7 @@ module.exports.changeAvatar = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        res.send({ data: profile });
+        res.send(profile);
       }
     })
     .catch((err) => {
