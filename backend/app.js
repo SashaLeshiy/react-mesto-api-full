@@ -23,6 +23,12 @@ mongoose.connect(MONGO_URI, {
   useUnifiedTopology: true,
 });
 
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 app.use(requestLogger);
 app.post('/api/sign-in', celebrate({
   body: Joi.object().keys({

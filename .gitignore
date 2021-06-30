@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Dependency directory
 /backend/node_modules/*
+/backend/.env
 
 # Optional npm cache directory
 .npm
