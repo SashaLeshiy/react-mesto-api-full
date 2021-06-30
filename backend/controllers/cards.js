@@ -95,7 +95,6 @@ module.exports.dislikeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        console.log(card);
         res.send(card);
       }
     })
