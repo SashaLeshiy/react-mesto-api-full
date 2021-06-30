@@ -11,7 +11,6 @@ module.exports.getCards = (req, res, next) => {
 module.exports.getCardId = (req, res, next) => {
   Card.findById(req.params.id)
     .then((card) => {
-      console.log(card);
       if (!card) {
         const err = new Error();
         err.statusCode = 404;
@@ -96,6 +95,7 @@ module.exports.dislikeCard = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
+        console.log(card);
         res.send(card);
       }
     })
