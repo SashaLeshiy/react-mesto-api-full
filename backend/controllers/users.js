@@ -23,7 +23,6 @@ module.exports.getUser = (req, res, next) => {
         err.statusCode = 404;
         next(err);
       } else {
-        console.log(user);
         res.send(user);
       }
     })
