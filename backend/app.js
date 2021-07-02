@@ -9,10 +9,10 @@ const { login, createUser } = require('./controllers/users');
 
 require('dotenv').config();
 
-const PORT = 3000;
-const MONGO_URI = 'mongodb://localhost:27017';
+// const PORT = 3000;
+// const MONGO_URI = 'mongodb://localhost:27017';
 
-// const { PORT, MONGO_URI } = process.env;
+const { PORT, MONGO_URI } = process.env;
 
 const app = express();
 
