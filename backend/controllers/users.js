@@ -1,4 +1,3 @@
-const validator = require('validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
@@ -48,38 +47,26 @@ module.exports.getUserId = (req, res, next) => {
 };
 
 module.exports.createUser = (req, res, next) => {
-  if (!validator.isEmail(req.body.email)) {
-    const err = new Error();
-    err.statusCode = 400;
-    next(err);
-  } else {
-    bcrypt.hash(req.body.password, 10)
-      .then((hash) => User.create({
-        email: req.body.email,
-        password: hash,
-        name: req.body.name,
-        about: req.body.about,
-        avatar: req.body.avatar,
-      }))
-      .then((user) => res.send({
-        data: {
-          name: user.name, about: user.about, email: user.email, avatar: user.avatar,
-        },
-      }))
-      .catch((err) => {
-        next(err);
-      });
-  }
+  bcrypt.hash(req.body.password, 10)
+    .then((hash) => User.create({
+      email: req.body.email,
+      password: hash,
+      name: req.body.name,
+      about: req.body.about,
+      avatar: req.body.avatar,
+    }))
+    .then((user) => res.send({
+      data: {
+        name: user.name, about: user.about, email: user.email, avatar: user.avatar,
+      },
+    }))
+    .catch((err) => {
+      next(err);
+    });
 };
 
 module.exports.changeProfile = (req, res, next) => {
   const { name, about } = req.body;
-  if (!name || !about) {
-    const err = new Error();
-    err.statusCode = 400;
-    next(err);
-    return;
-  }
   User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true, new: true })
     .then((profile) => {
       if (!profile) {
@@ -97,12 +84,6 @@ module.exports.changeProfile = (req, res, next) => {
 
 module.exports.changeAvatar = (req, res, next) => {
   const { avatar } = req.body;
-  if (!avatar) {
-    const err = new Error();
-    err.statusCode = 400;
-    next(err);
-    return;
-  }
   User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true, new: true })
     .then((profile) => {
       if (!profile) {
