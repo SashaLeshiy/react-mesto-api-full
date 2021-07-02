@@ -9,7 +9,8 @@ module.exports = (req, res, next) => {
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
     const err = new Error();
-    console.log(err.name);
+    err.statusCode = 401;
+    err.message = 'Необходима авторизация';
     next(err);
     // return res.status(401).send({ message: 'Необходима авторизация' });
   }

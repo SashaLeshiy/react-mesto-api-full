@@ -32,14 +32,14 @@ app.get('/crash-test', () => {
 app.use(requestLogger);
 app.post('/api/sign-in', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
 
 app.post('/api/sign-up', celebrate({
   body: Joi.object().keys({
-    email: Joi.string().required(),
+    email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), createUser);

@@ -29,6 +29,7 @@
 
 **Ссылка**
 https://zomlesh.nomoredomains.club
+https://zomlesh.nomoredomains.club/api - backend
 
 **IP**
 178.154.205.127

@@ -20,14 +20,14 @@ router.get('/api/users/:userId', auth, celebrate({
 
 router.patch('/api/users/me', auth, celebrate({
   body: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
+    name: Joi.string().required().min(2).max(30),
+    about: Joi.string().required().min(2).max(30),
   }),
 }), changeProfile);
 
 router.patch('/api/users/avatar', auth, celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
+    avatar: Joi.string().required().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
   }),
 }), changeAvatar);
 
