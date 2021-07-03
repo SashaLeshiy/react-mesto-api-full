@@ -52,7 +52,7 @@ app.use('/', users);
 app.use('/', cards);
 
 app.use((req, res, next) => {
-  const err = new Error('Ре найдено');
+  const err = new Error('Hе найдено');
   err.statusCode = 404;
   next(err);
 });
