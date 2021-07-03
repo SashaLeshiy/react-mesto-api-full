@@ -10,27 +10,31 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
-router.get('/api/cards', auth, getCards);
+const API_PATH = '/api';
 
-router.post('/api/cards', auth, celebrate({
+// const { API_PATH } = process.env;
+
+router.get(`${API_PATH}/cards`, auth, getCards);
+
+router.post(`${API_PATH}/cards`, auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     link: Joi.string().required().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
   }),
 }), createCard);
 
-router.delete('/api/cards/:cardId', auth, celebrate({
+router.delete(`${API_PATH}/cards/:cardId`, auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),
 }), deleteCard);
 
-router.put('/api/cards/:cardId/likes', auth, celebrate({
+router.put(`${API_PATH}/cards/:cardId/likes`, auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),
 }), likeCard);
-router.delete('/api/cards/:cardId/likes', auth, celebrate({
+router.delete(`${API_PATH}/cards/:cardId/likes`, auth, celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }),

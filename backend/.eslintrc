@@ -5,12 +5,12 @@
     "no-console": 0,
     "extends": 0
   },
-  "extends": "airbnb-base",
-  "settings": {
-    "import/resolver": {
-        "node": {
-            "paths": ["path.resolve(__dirname, "src")"]
-        }
-    }
-}
+  "extends": "airbnb-base"
+//   "settings": {
+//     "import/resolver": {
+//         "node": {
+//             "paths": ["path.resolve(__dirname, "src")"]
+//         }
+//     }
+// }
 }

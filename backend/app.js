@@ -9,10 +9,11 @@ const { login, createUser } = require('./controllers/users');
 
 require('dotenv').config();
 
-// const PORT = 3000;
-// const MONGO_URI = 'mongodb://localhost:27017';
+const PORT = 3000;
+const MONGO_URI = 'mongodb://localhost:27017';
+const API_PATH = '/api';
 
-const { PORT, MONGO_URI } = process.env;
+// const { PORT, MONGO_URI, API_PATH } = process.env;
 
 const app = express();
 
@@ -33,14 +34,14 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger);
-app.post('/api/sign-in', celebrate({
+app.post(`${API_PATH}/sign-in`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post('/api/sign-up', celebrate({
+app.post(`${API_PATH}/sign-up`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
@@ -50,8 +51,10 @@ app.post('/api/sign-up', celebrate({
 app.use('/', users);
 app.use('/', cards);
 
-app.use((req, res) => {
-  res.status(404).send({ message: 'Ресурс не найден' });
+app.use((req, res, next) => {
+  const err = new Error('Ре найдено');
+  err.statusCode = 404;
+  next(err);
 });
 
 app.use(errorLogger);
@@ -59,26 +62,31 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (err.name === 'CastError') {
-    return res.status(400).send({ message: 'Некорректный _id' });
-  }
-  if (err.name === 'ValidationError' || err.statusCode === 400) {
-    return res.status(400).send({ message: 'Отправлены неверные данные' });
-  }
-  if (err.statusCode === 404) {
-    return res.status(404).send({ message: 'Не найдено' });
-  }
-  if (err.name === 'MongoError' && err.code === 11000) {
-    return res.status(409).send({ message: 'Данный email зарегистрирован' });
-  }
-  if (err.statusCode === 401 || err.statusCode === 420) {
-    return res.status(401).send({ message: 'Неверно указаны почта или пароль' });
-  }
-  if (err.statusCode === 403) {
-    return res.status(403).send({ message: 'Нет доступа' });
-  }
-  next();
-  return res.status(500).send({ message: 'На сервере произошла ошибка' });
+  const status = err.statusCode || 500;
+  const { message } = err;
+  res.status(status).json({ message: message || 'Произошла ошибка на сервере' });
+  return next();
+
+  // if (err.name === 'CastError') {
+  //   return res.status(400).send({ message: 'Некорректный _id' });
+  // }
+  // if (err.name === 'ValidationError' || err.statusCode === 400) {
+  //   return res.status(400).send({ message: 'Отправлены неверные данные' });
+  // }
+  // if (err.statusCode === 404) {
+  //   return res.status(404).send({ message: 'Не найдено' });
+  // }
+  // if (err.name === 'MongoError' && err.code === 11000) {
+  //   return res.status(409).send({ message: 'Данный email зарегистрирован' });
+  // }
+  // if (err.statusCode === 401 || err.statusCode === 420) {
+  //   return res.status(401).send({ message: 'Неверно указаны почта или пароль' });
+  // }
+  // if (err.statusCode === 403) {
+  //   return res.status(403).send({ message: 'Нет доступа' });
+  // }
+  // next();
+  // return res.status(500).send({ message: 'На сервере произошла ошибка' });
 });
 
 app.listen(PORT, () => {

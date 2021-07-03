@@ -12,7 +12,7 @@ module.exports.getCardId = (req, res, next) => {
   Card.findById(req.params.id)
     .then((card) => {
       if (!card) {
-        const err = new Error();
+        const err = new Error('Не найдено');
         err.statusCode = 404;
         next(err);
       } else {
@@ -39,7 +39,7 @@ module.exports.deleteCard = (req, res, next) => {
   Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
-        const err = new Error();
+        const err = new Error('Не найдено');
         err.statusCode = 404;
         next(err);
       }
@@ -47,7 +47,7 @@ module.exports.deleteCard = (req, res, next) => {
     })
     .then((card) => {
       if (JSON.stringify(card.owner) !== JSON.stringify(req.user._id)) {
-        const err = new Error();
+        const err = new Error('Нет доступа');
         err.statusCode = 403;
         next(err);
       } else {
@@ -71,7 +71,7 @@ module.exports.likeCard = (req, res, next) => {
     { new: true })
     .then((card) => {
       if (!card) {
-        const err = new Error();
+        const err = new Error('Не найдено');
         err.statusCode = 404;
         next(err);
       } else {
@@ -79,6 +79,11 @@ module.exports.likeCard = (req, res, next) => {
       }
     })
     .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new Error('Некорректные данные');
+        error.statusCode = 400;
+        next(error);
+      }
       next(err);
     });
 };
@@ -91,7 +96,7 @@ module.exports.dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (!card) {
-        const err = new Error();
+        const err = new Error('Не найдено');
         err.statusCode = 404;
         next(err);
       } else {
@@ -99,6 +104,11 @@ module.exports.dislikeCard = (req, res, next) => {
       }
     })
     .catch((err) => {
+      if (err.name === 'CastError') {
+        const error = new Error('Некорректные данные');
+        error.statusCode = 400;
+        next(error);
+      }
       next(err);
     });
 };

@@ -10,22 +10,26 @@ const {
   getUser,
 } = require('../controllers/users');
 
-router.get('/api/users', auth, getUsers);
-router.get('/api/users/me', auth, getUser);
-router.get('/api/users/:userId', auth, celebrate({
+const API_PATH = '/api';
+
+// const { API_PATH } = process.env;
+
+router.get(`${API_PATH}/users`, auth, getUsers);
+router.get(`${API_PATH}/users/me`, auth, getUser);
+router.get(`${API_PATH}/users/:userId`, auth, celebrate({
   params: Joi.object().keys({
     userId: Joi.string().hex().length(24),
   }),
 }), getUserId);
 
-router.patch('/api/users/me', auth, celebrate({
+router.patch(`${API_PATH}/users/me`, auth, celebrate({
   body: Joi.object().keys({
     name: Joi.string().required().min(2).max(30),
     about: Joi.string().required().min(2).max(30),
   }),
 }), changeProfile);
 
-router.patch('/api/users/avatar', auth, celebrate({
+router.patch(`${API_PATH}/users/avatar`, auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
   }),

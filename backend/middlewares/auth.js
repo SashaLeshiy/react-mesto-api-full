@@ -8,19 +8,18 @@ module.exports = (req, res, next) => {
   const { authorization } = req.headers;
 
   if (!authorization || !authorization.startsWith('Bearer ')) {
-    const err = new Error();
+    const err = new Error('Необходима авторизация');
     err.statusCode = 401;
-    err.message = 'Необходима авторизация';
     next(err);
-    // return res.status(401).send({ message: 'Необходима авторизация' });
   }
   const token = authorization.replace('Bearer ', '');
   let payload;
   try {
     payload = jwt.verify(token, JWT_SECRET);
   } catch (err) {
-    next(err);
-    // return res.status(401).send({ message: 'Необходима авторизация' });
+    const error = new Error('Необходима авторизация');
+    error.statusCode = 401;
+    next(error);
   }
   req.user = payload;
   next();

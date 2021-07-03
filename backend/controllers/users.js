@@ -18,7 +18,7 @@ module.exports.getUser = (req, res, next) => {
   User.findOne({ _id: req.user._id })
     .then((user) => {
       if (!user) {
-        const err = new Error();
+        const err = new Error('Пользователь не найден');
         err.statusCode = 404;
         next(err);
       } else {
@@ -34,7 +34,7 @@ module.exports.getUserId = (req, res, next) => {
   User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
-        const err = new Error();
+        const err = new Error('Пользователь не найден');
         err.statusCode = 404;
         next(err);
       } else {
@@ -61,6 +61,11 @@ module.exports.createUser = (req, res, next) => {
       },
     }))
     .catch((err) => {
+      if (err.name === 'MongoError' && err.code === 11000) {
+        const error = new Error('Данные емейл зарегистрирован');
+        error.statusCode = 409;
+        next(error);
+      }
       next(err);
     });
 };
@@ -70,7 +75,7 @@ module.exports.changeProfile = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { name, about }, { runValidators: true, new: true })
     .then((profile) => {
       if (!profile) {
-        const err = new Error();
+        const err = new Error('Пользователь не найден');
         err.statusCode = 404;
         next(err);
       } else {
@@ -87,7 +92,7 @@ module.exports.changeAvatar = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true, new: true })
     .then((profile) => {
       if (!profile) {
-        const err = new Error();
+        const err = new Error('Пользователь не найден');
         err.statusCode = 404;
         next(err);
       } else {
@@ -103,8 +108,14 @@ module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   return User.findUserByCredentials(email, password, next)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
-      res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ token });
+      if (!user) {
+        const err = new Error('Неверно указаны почта или пароль');
+        err.statusCode = 420;
+        next(err);
+      } else {
+        const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+        res.cookie('jwt', token, { maxAge: 3600000 * 24 * 7, httpOnly: true }).send({ token });
+      }
     })
     .catch((err) => {
       next(err);
