@@ -6,11 +6,4 @@
     "extends": 0
   },
   "extends": "airbnb-base"
-//   "settings": {
-//     "import/resolver": {
-//         "node": {
-//             "paths": ["path.resolve(__dirname, "src")"]
-//         }
-//     }
-// }
 }
