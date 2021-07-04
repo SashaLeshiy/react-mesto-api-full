@@ -34,7 +34,7 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger);
-app.post('/signin', celebrate({
+app.post(`${API_PATH}/signin`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
