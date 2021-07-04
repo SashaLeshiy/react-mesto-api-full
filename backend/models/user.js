@@ -38,16 +38,16 @@ userSchema.statics.findUserByCredentials = function compareDataUser(email, passw
   return this.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        const err = new Error();
-        err.statusCode = 420;
+        const err = new Error('Неправильные почта или пароль');
+        err.statusCode = 401;
         next(err);
       }
 
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
-            const err = new Error();
-            err.statusCode = 420;
+            const err = new Error('Неправильные почта или пароль');
+            err.statusCode = 401;
             next(err);
           }
           return user;

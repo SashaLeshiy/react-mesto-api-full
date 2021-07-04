@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 require('dotenv').config();
 
-const { JWT_SECRET } = process.env;
+const { JWT_SECRET = 'dev-secret' } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -110,7 +110,7 @@ module.exports.login = (req, res, next) => {
     .then((user) => {
       if (!user) {
         const err = new Error('Неверно указаны почта или пароль');
-        err.statusCode = 420;
+        err.statusCode = 401;
         next(err);
       } else {
         const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });

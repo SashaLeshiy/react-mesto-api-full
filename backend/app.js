@@ -34,17 +34,20 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger);
-app.post(`${API_PATH}/sign-in`, celebrate({
+app.post(`${API_PATH}/signin`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post(`${API_PATH}/sign-up`, celebrate({
+app.post(`${API_PATH}/signup`, celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
+    name: Joi.string().min(2).max(30),
+    about: Joi.string().min(2).max(30),
+    avatar: Joi.string().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
   }),
 }), createUser);
 

@@ -29,7 +29,7 @@ router.patch(`${API_PATH}/users/me`, auth, celebrate({
   }),
 }), changeProfile);
 
-router.patch(`${API_PATH}/users/avatar`, auth, celebrate({
+router.patch(`${API_PATH}/users/me/avatar`, auth, celebrate({
   body: Joi.object().keys({
     avatar: Joi.string().required().regex(/^(http|https):\/\/(www\.)?([\da-z.-]+)\.([a-z.]{2,6})([/\w\-._~:/?#[\]@!$&'()*+,;=]*)*#?$/),
   }),
