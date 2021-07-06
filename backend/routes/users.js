@@ -10,10 +10,6 @@ const {
   getUser,
 } = require('../controllers/users');
 
-// const API_PATH = '/api';
-
-// const { API_PATH } = process.env;
-
 router.get('/users', auth, getUsers);
 router.get('/users/me', auth, getUser);
 router.get('/users/:userId', auth, celebrate({

@@ -11,9 +11,6 @@ require('dotenv').config();
 
 const PORT = 3000;
 const MONGO_URI = 'mongodb://localhost:27017';
-// const API_PATH = '/api';
-
-// const { PORT, MONGO_URI, API_PATH } = process.env;
 
 const app = express();
 

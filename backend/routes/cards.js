@@ -10,10 +10,6 @@ const {
   dislikeCard,
 } = require('../controllers/cards');
 
-// const API_PATH = '/api';
-
-// const { API_PATH } = process.env;
-
 router.get('/cards', auth, getCards);
 
 router.post('/cards', auth, celebrate({
