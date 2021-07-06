@@ -11,7 +11,7 @@ require('dotenv').config();
 
 const PORT = 3000;
 const MONGO_URI = 'mongodb://localhost:27017';
-const API_PATH = '/api';
+// const API_PATH = '/api';
 
 // const { PORT, MONGO_URI, API_PATH } = process.env;
 
@@ -34,14 +34,14 @@ app.get('/crash-test', () => {
 });
 
 app.use(requestLogger);
-app.post(`${API_PATH}/signin`, celebrate({
+app.post('/signin', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
   }),
 }), login);
 
-app.post(`${API_PATH}/signup`, celebrate({
+app.post('/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
