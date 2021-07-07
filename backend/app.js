@@ -26,7 +26,7 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.get('/api/crash-test', () => {
+app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
