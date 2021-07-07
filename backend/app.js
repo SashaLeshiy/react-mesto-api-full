@@ -39,7 +39,7 @@ app.post('/signin', celebrate({
   }),
 }), login);
 
-app.post('/signup', celebrate({
+app.post('/api/signup', celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
