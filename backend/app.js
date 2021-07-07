@@ -26,7 +26,7 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.get('/crash-test', () => {
+app.get('https://zomlesh.nomoredomains.club/api/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
