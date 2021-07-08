@@ -31,8 +31,6 @@ app.use(cors({
     'http://localhost:3000',
   ],
   credentials: true,
-  headers: 'Origin, X-Requested-With, Content-Type, Accept, authorization',
-  methods: 'GET,POST,PATCH,DELETE,OPTIONS,PUT',
 }));
 
 app.use(requestLogger);
