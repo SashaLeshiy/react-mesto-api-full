@@ -25,15 +25,13 @@ mongoose.connect(MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(cors(
-  // {
-  //   origin: [
-  //     'http://zomlesh.nomoredomains.club',
-  //     'http://localhost:3000',
-  //   ],
-  //   credentials: true,
-  // },
-));
+app.use(cors({
+  origin: [
+    'http://zomlesh.nomoredomains.club',
+    'http://localhost:3000',
+  ],
+  credentials: true,
+}));
 
 app.use(requestLogger);
 
@@ -43,7 +41,7 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.post('/signin', celebrate({
+app.post('/signin', cors(), celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email(),
     password: Joi.string().required(),
