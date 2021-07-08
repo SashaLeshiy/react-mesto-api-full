@@ -26,6 +26,20 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
+const allowedCors = [
+  'https://zomlesh.nomoredomains.club',
+  'http://zomlesh.nomoredomains.club',
+  'localhost:3000',
+];
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
 app.get('/crash-test', () => {
   setTimeout(() => {
     throw new Error('Сервер сейчас упадёт');
