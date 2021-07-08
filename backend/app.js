@@ -26,7 +26,10 @@ mongoose.connect(MONGO_URI, {
 });
 
 app.use(cors({
-  origin: 'https://zomlesh.nomoredomains.club',
+  origin: [
+    'http://zomlesh.nomoredomains.club',
+    'http://localhost:3000',
+  ],
   credentials: true,
   headers: 'Origin, X-Requested-With, Content-Type, Accept, authorization',
   methods: 'GET,POST,PATCH,DELETE,OPTIONS,PUT',
