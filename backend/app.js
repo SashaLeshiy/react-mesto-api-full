@@ -25,6 +25,8 @@ mongoose.connect(MONGO_URI, {
   useUnifiedTopology: true,
 });
 
+app.use(requestLogger);
+
 app.use(cors({
   origin: [
     'http://zomlesh.nomoredomains.club',
@@ -32,8 +34,6 @@ app.use(cors({
   ],
   credentials: true,
 }));
-
-app.use(requestLogger);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
