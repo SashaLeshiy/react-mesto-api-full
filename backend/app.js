@@ -25,13 +25,15 @@ mongoose.connect(MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-app.use(cors({
-  origin: [
-    'http://zomlesh.nomoredomains.club',
-    'http://localhost:3000',
-  ],
-  credentials: true,
-}));
+app.use(cors(
+  // {
+  //   origin: [
+  //     'http://zomlesh.nomoredomains.club',
+  //     'http://localhost:3000',
+  //   ],
+  //   credentials: true,
+  // },
+));
 
 app.use(requestLogger);
 
