@@ -27,17 +27,14 @@ mongoose.connect(MONGO_URI, {
 
 app.use(requestLogger);
 
-app.use(cors(
-  // {
-  //   origin: [
-  //     'http://zomlesh.nomoredomains.club',
-  //     'https://zomlesh.nomoredomains.club',
-  //     'http://localhost:3000',
-  //   ],
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  //   credentials: true,
-  // },
-));
+app.use(cors({
+  origin: [
+    'http://zomlesh.nomoredomains.club',
+    'https://zomlesh.nomoredomains.club',
+    'http://localhost:3000',
+  ],
+  credentials: true,
+}));
 
 app.get('/crash-test', () => {
   setTimeout(() => {
