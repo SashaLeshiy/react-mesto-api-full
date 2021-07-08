@@ -33,10 +33,9 @@ app.use(cors({
     'https://zomlesh.nomoredomains.club',
     'http://localhost:3000',
   ],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
   credentials: true,
 }));
-
-app.options('*', cors());
 
 app.get('/crash-test', () => {
   setTimeout(() => {
