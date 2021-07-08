@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { celebrate, Joi, errors } = require('celebrate');
@@ -23,6 +24,13 @@ mongoose.connect(MONGO_URI, {
   useFindAndModify: false,
   useUnifiedTopology: true,
 });
+
+app.use(cors({
+  origin: 'https://zomlesh.nomoredomains.club',
+  credentials: true,
+  headers: 'Origin, X-Requested-With, Content-Type, Accept, authorization',
+  methods: 'GET,POST,PATCH,DELETE,OPTIONS,PUT',
+}));
 
 app.use(requestLogger);
 
