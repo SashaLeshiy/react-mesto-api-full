@@ -30,6 +30,7 @@ app.use(requestLogger);
 app.use(cors({
   origin: [
     'http://zomlesh.nomoredomains.club',
+    'https://zomlesh.nomoredomains.club',
     'http://localhost:3000',
   ],
   credentials: true,
