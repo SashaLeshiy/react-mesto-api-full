@@ -29,8 +29,8 @@
 Страница позволяет добавить фотографии географических мест с указанием профиля автора и возможностью отмечать понравившиеся фотографии.
 
 **Ссылка**
-https://zomlesh.nomoredomains.club
-https://api.zomlesh.nomoredomains.club - backend
+* https://zomlesh.nomoredomains.club
+* backend: https://api.zomlesh.nomoredomains.club
 
 **IP**
 178.154.205.127
