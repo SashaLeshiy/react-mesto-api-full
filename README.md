@@ -13,6 +13,7 @@
 * Api
 * Node.js/Nginx
 * Express
+* MongoDB
 
 
 **Работа**
@@ -21,7 +22,7 @@
 * Применены слудующие контрольные точки: 320px, 408px, 416px, 580px, 590px, 879px, 940px и 1280px
 * Фронтенд: Javascript/React/Webpack
 * Сервер: Яндекс.Облако
-* Бэкенд: Node.js/Nginx/Express
+* Бэкенд: Node.js/Nginx/Express/MongoDB
 
 
 **Описание**
@@ -29,7 +30,7 @@
 
 **Ссылка**
 https://zomlesh.nomoredomains.club
-https://zomlesh.nomoredomains.club/api - backend
+https://api.zomlesh.nomoredomains.club - backend
 
 **IP**
 178.154.205.127
